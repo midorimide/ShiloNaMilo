@@ -1,7 +1,7 @@
 import axios from 'axios';
 import * as gateway from './gateway';
 
-const services = [
+export const services = [
     {
         key: 1,
         id: 1,
