@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import Screen  from './Screen'
+import ServicesScreen  from './Screen'
 import { getServices } from './Actions'
 import { isLoadingSelector, getServicesSelector } from './Reducer'
 
@@ -16,4 +16,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(Screen)
+)(ServicesScreen)

@@ -1,12 +1,15 @@
 import React from 'react';
+import { Provider } from 'react-redux'
 import { StyleSheet, Text, View } from 'react-native';
-import ServiceList from './components/ServiceList'
-import { services } from './microservices/services'
+import ServicesContainer from './features/services';
+import { configureStore } from './Store';
 
 export default class App extends React.Component {
   render() {
     return (
-      <ServiceList items={services}/>
+      <Provider store={configureStore()}>
+        <ServicesContainer/>
+      </Provider>
     );
   }
 }

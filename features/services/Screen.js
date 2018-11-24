@@ -21,7 +21,9 @@ class ServicesScreen extends Component {
 				</View>
 			)			
 		}
-		else {			
+		else {	
+			console.log('AAAAAAAAAAAAAAAAAAAAAA')
+			console.log(this.props.services)		
 			return (
 				<ServiceList items={this.props.services}/>
 			)

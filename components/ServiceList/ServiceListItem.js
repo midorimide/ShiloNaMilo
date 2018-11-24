@@ -13,8 +13,7 @@ class ServiceListItem extends Component {
 				<View>
 					<Text>{this.props.data.name}</Text>
 					<Text>by {this.props.data.owner}</Text>
-					<Text>Mark: {this.props.data.mark}</Text>
-					<Text>Price: {this.props.data.price}$</Text>
+					<Text>Mark: {this.props.data.mark}</Text>					
 				</View>
 			</TouchableOpacity>
 		);

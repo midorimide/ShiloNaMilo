@@ -41,9 +41,10 @@ export async function getAllServices(start = 0, amount = 10, sortingField = 'id'
     let request = await axios.get(gateway.paths.services.all, {
         params: {amount, start, sortingField, ascending}
     });
+    console.log(request)
 
     return {
         status: 1,
-        result: services.concat(request.data.result)
+        result: services.concat(request.data)
     }
 }
