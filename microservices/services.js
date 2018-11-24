@@ -37,62 +37,13 @@ const services = [
     }
 ];
 
-let sleep = (t = 500) => new Promise(resolve => setTimeout(resolve, t));
-
-export async function getService(serviceId) {
-    await sleep();
-
-    let service = services.find(s => s.id.toString() === serviceId);
-
-    if (!service) {
-        return {
-            errors: {
-                code: 404,
-                message: 'service not found'
-            }
-        };
-    }
-
-    return {service};
-}
-
-export async function getUserServices(userId) {
-    let res = await axios.get(gateway.paths.services.user, {
-        params: {
-            user: userId
-        }
+export async function getAllServices(start = 0, amount = 10, sortingField = 'id', ascending = true){
+    let request = await axios.get(gateway.paths.services.all, {
+        params: {amount, start, sortingField, ascending}
     });
 
-    return { services: res.data.result }
-
-    // await sleep();
-    // return {services};
-}
-
-export async function serviceSearch(query) {
-    console.log('request');
-    let res = await axios.get(gateway.paths.services.search, {
-        params: query
-    });
-    console.log(res);
-    let services = res.data.result.result;
     return {
-        errors: {
-            message: services.length ? undefined : 'nothing found'
-        },
-        services
-    };
-
-    // await sleep();
-    //
-    // if (query.text === 'service') {
-    //     return {
-    //         errors: {
-    //             message: 'nothing found'
-    //         },
-    //         services: []
-    //     };
-    // }
-    //
-    // return {services};
+        status: 1,
+        result: services.concat(request.data.result)
+    }
 }
