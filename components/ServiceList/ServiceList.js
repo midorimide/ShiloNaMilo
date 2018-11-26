@@ -15,7 +15,7 @@ class ServiceList extends Component {
 }
 
 ServiceList.propTypes = {
-	items: PropTypes.array.isRequired
+	items: PropTypes.array
 }
 
 export default ServiceList

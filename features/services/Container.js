@@ -1,16 +1,15 @@
 import { connect } from 'react-redux'
-import ServicesScreen  from './Screen'
-import { getServices } from './Actions'
+import { getAllServices } from './Actions'
 import { isLoadingSelector, getServicesSelector } from './Reducer'
+import ServicesScreen from './Screen';
 
 const mapStateToProps = (state) => ({
-
-	servicesLoading: isLoadingSelector(state),
+	isLoading: isLoadingSelector(state),
 	services: getServicesSelector(state)
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    getServices: () => dispatch(getServices())
+    getAllServices: () => dispatch(getAllServices())
 })
 
 export default connect(

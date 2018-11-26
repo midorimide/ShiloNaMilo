@@ -1,0 +1,25 @@
+Chat:
+	http://35.244.172.73/dialog/aquire/all - get all messages (GET)
+	http://35.244.172.73/dialog/save - save chat message (POST)
+	http://35.244.172.73/dialog/aquire/service/{servise_id}/customer/{customer_id} - get chat messages with specific service id and customer id (GET)
+	http://35.244.172.73/comments/aquire/all - get all comments (GET)
+	http://35.244.172.73/comments/save - save comment (POST)
+	http://35.244.172.73/comments/aquire/service/{servise_id}/customer/{customer_id} - get comments with specific service id and customer id (GET)
+
+User Profile:
+	http://35.244.240.101/profiles/{profile_id} - get user profile (GET)
+	http://35.244.240.101/profiles/update - update user profile (POST)
+	http://35.244.240.101/profiles/search?"query" - search (GET)
+
+
+Services:
+	http://35.244.186.40/services/all - (GET)
+	http://35.244.186.40/services/id - (GET)
+	http://35.244.186.40/services/category - (GET)
+	http://35.244.186.40/services/user - (GET)
+	http://35.244.186.40/services/intext - (GET)
+	http://35.244.186.40/services/suggest - (GET)
+	http://35.244.186.40/services/add_service - (POST)
+	http://35.244.186.40/services/update_service - (POST)
+	http://35.244.186.40/services/add_mark/{id}/{mark} - (POST)
+	http://35.244.186.40/services/delete/{id} - (PUT)

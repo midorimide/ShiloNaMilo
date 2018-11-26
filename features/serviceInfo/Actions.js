@@ -1,20 +1,20 @@
 import * as types from './ActionTypes'
 import * as Services from '../../microservices/services';
 
-export const getAllServices = () => async (dispatch) => {
+export const getServiceById = (id) => async (dispatch) => {
     dispatch({
-        type: types.SERVICES_REQUEST
+        type: types.SERVICE_REQUEST
     })
 
-    let request = await Services.getAllServices()
+    let request = await Services.getServiceById(id)
     if (request.status === 200){
         dispatch({
-            type: types.SERVICES_SUCCESS,
+            type: types.SERVICE_SUCCESS,
             data: request.result
         })
     } else {
         dispatch({
-            type: types.SERVICES_FAILURE
+            type: types.SERVICE_FAILURE
         })
     }
 }

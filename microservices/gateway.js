@@ -14,17 +14,28 @@ function servicePath(rootPath, pathsGen) {
 export const paths = {
     auth: 'http://localhost:8080/auth',
     profiles: servicePath('http://35.244.240.101/profiles', get => [{
-        profile: (id) => get('/' + id),
+        profile: get(''),
         update: get('/update'),
         search: get('/search'),
     }]),
     services: servicePath('http://35.244.186.40/services', get => [{
         all: get('/all'),
-        service: get('/id'),
+        id: get('/id'),
+        category: get('/category'),
         user: get('/user'),
-        search: get('/intext'),
+        intext: get('/intext'),
+        suggest: get('/suggest'),
+        addService: get('/add_service'),
+        updateService: get('/update_service'),
+        addMark: get('/add_mark'),
+        delete: get('/delete')
     }]),
     chat: servicePath('http://35.244.172.73', get => [{
+        allDialogs: get('/dialogs/aquire/all'),
+        saveDialog: get('/save'),
+        dialogByServiceAndCustomer: get('/dialog/aquire/service'),
         allComments: get('/comments/aquire/all'),
+        saveComment: get('comments/save'),
+        commentByServiceAndCustomer: get('/comments/aquire/service')
     }]),
 };

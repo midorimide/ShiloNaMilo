@@ -3,27 +3,24 @@ import { Text, TextInput, View, Button, ScrollView, StyleSheet } from 'react-nat
 import PropTypes from 'prop-types'
 import ServiceList from '../../components/ServiceList'
 
-class ServicesScreen extends Component {
+export default class ServicesScreen extends Component {
 	constructor(props) {
 		super(props);
 	}
 
 	componentDidMount() {
-		console.log(this.props);
-		this.props.getServices()
+		this.props.getAllServices()
 	}
 
 	render() {
-		if (this.props.servicesLoading) {
+		if (this.props.isLoading) {
             return (
-				<View>
+				<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
 					<Text>Loading</Text>
 				</View>
-			)			
+			)
 		}
-		else {	
-			console.log('AAAAAAAAAAAAAAAAAAAAAA')
-			console.log(this.props.services)		
+		else {
 			return (
 				<ServiceList items={this.props.services}/>
 			)
@@ -32,9 +29,7 @@ class ServicesScreen extends Component {
 }
 
 ServicesScreen.propTypes = {
+	isLoading: PropTypes.bool,
 	services: PropTypes.array,
-	getServices: PropTypes.func,
-	servicesLoading: PropTypes.bool
+	getAllServices: PropTypes.func
 }
-
-export default ServicesScreen
