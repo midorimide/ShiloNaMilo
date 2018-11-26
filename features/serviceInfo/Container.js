@@ -1,11 +1,17 @@
 import { connect } from 'react-redux'
-import { isLoadingSelector, getServiceInfoSelector } from './Reducer';
+import {
+	isLoadingSelector,
+	getServiceInfoSelector,
+	isUserLoadingSelector,
+	getUserInfoSelector } from './Reducer';
 import { getServiceById } from './Actions';
 import ServiceInfoScreen from './Screen';
 
 const mapStateToProps = (state) => ({
-	servicesLoading: isLoadingSelector(state),
-	service: getServiceInfoSelector(state)
+	isServiceLoading: isLoadingSelector(state),
+	isUserLoading: isUserLoadingSelector(state),
+	service: getServiceInfoSelector(state),
+	user: getUserInfoSelector(state)
 })
 
 const mapDispatchToProps = (dispatch) => ({

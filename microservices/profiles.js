@@ -19,7 +19,7 @@ const profiles = [
 ];
 
 export async function getProfile(id) {
-    let res = await axios.get(gateway.paths.profiles.profile, {
+    let request = await axios.get(gateway.paths.profiles.profile, {
         params: {
             id: id
         }

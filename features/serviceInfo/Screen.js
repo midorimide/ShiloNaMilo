@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { View, Text } from 'react-native'
+import { View, Text, ActivityIndicator } from 'react-native'
 import Star from 'react-native-star-view'
 import { withNavigation } from 'react-navigation';
 
@@ -11,14 +11,13 @@ class ServiceInfoScreen extends Component{
 
 	componentDidMount(){
 		this.props.getServiceById(this.props.navigation.getParam('id', 0))
-		console.log(this.props.service)
 	}
 
 	render(){
-		if (this.props.isLoading){
+		if (this.props.isServiceLoading){
 			return(
 				<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-					<Text>Loading</Text>
+					<ActivityIndicator size="large"/>
 				</View>
 			)
 		}
@@ -29,10 +28,22 @@ class ServiceInfoScreen extends Component{
 		if (this.props.service.mark > 5){
 			this.props.service.mark = 5
 		}
+
+		let userDisplay = Component
+		if (this.props.isUserLoading){
+			userDisplay = <ActivityIndicator size="small"/>
+		} else {
+			let username = "Default user"
+			if (this.props.user.username !== undefined){
+				username = this.props.user.username
+			}
+			userDisplay = <Text>by {username}</Text>
+		}
+
 		return (
 			<View>
 				<Text>{this.props.service.name}</Text>
-				<Text>by {this.props.service.user_id}</Text>
+				{userDisplay}
 				<Text>Category: {this.props.service.category}</Text>
 				<Text>Description:</Text>
 				<Text>{this.props.service.description}</Text>
@@ -44,8 +55,10 @@ class ServiceInfoScreen extends Component{
 }
 
 ServiceInfoScreen.propTypes = {
-	isLoading: PropTypes.bool,
+	isServiceLoading: PropTypes.bool,
+	isUserLoading: PropTypes.bool,
 	service: PropTypes.object,
+	user: PropTypes.object,
 	getServiceById: PropTypes.func
 }
 

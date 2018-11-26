@@ -11,9 +11,19 @@ import {
 import ServiceInfoContainer from './features/serviceInfo';
 import { Ionicons } from '@expo/vector-icons'
 
-const DrawerStack = createDrawerNavigator(
+const Drawer = createDrawerNavigator(
   {
     services: ServicesContainer
+  },
+  {
+    headerMode: 'none',
+    navigationOptions: ({navigation}) => ({
+      headerStyle: {backgroundColor: '#4C3E54'},
+      title: 'ShiloNaMilo',
+      headerTintColor: 'white',
+      headerLeft: <Ionicons style={{marginLeft:12}} name='ios-menu' color='white' size={32} onPress={()=>{
+        navigation.dispatch(DrawerActions.toggleDrawer())}}/>
+    })
   }
 )
 
@@ -22,10 +32,10 @@ const ModalStack = createStackNavigator(
     serviceInfo: ServiceInfoContainer
   },
   {
-    headerMode: 'screen',
-    navigationOptions: () => ({
+    headerMode: 'none',
+    navigationOptions: ({navigation}) => ({
       headerStyle: {backgroundColor: '#4C3E54'},
-      title: 'About this service',
+      title: 'ShiloNaMilo',
       headerTintColor: 'white'
     })
   }
@@ -33,18 +43,8 @@ const ModalStack = createStackNavigator(
 
 const AppStack = createStackNavigator(
   {
-    drawer: DrawerStack,
+    drawer: Drawer,
     modal: ModalStack
-  },
-  {
-    headerMode: 'screen',
-    navigationOptions: ({navigation}) => ({
-      headerStyle: {backgroundColor: '#4C3E54'},
-      title: 'ShiloNaMilo',
-      headerTintColor: 'white',
-      headerLeft: <Ionicons name='menu' color='white' size={32} onPress={()=>{
-        navigation.dispatch(DrawerActions.toggleDrawer())}}/>
-    })
   }
 )
 

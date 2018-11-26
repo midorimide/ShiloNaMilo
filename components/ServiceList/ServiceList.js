@@ -8,7 +8,7 @@ class ServiceList extends Component {
 		return (
 			<FlatList
 				data={this.props.items}
-				keyExtractor={(item,index) => {item.id}}
+				keyExtractor={(item,index) => item.id.toString()}
 				renderItem={({item}) => <ServiceListItem data={item}/>}/>
 		);
 	}

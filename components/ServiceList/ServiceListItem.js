@@ -5,9 +5,6 @@ import Star from 'react-native-star-view'
 import { withNavigation } from 'react-navigation';
 
 class ServiceListItem extends Component {
-	_onPress = () => {
-	}
-
 	render() {
 		if (this.props.data.mark < 0){
 			this.props.data.mark = 0

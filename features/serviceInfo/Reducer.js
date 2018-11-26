@@ -1,12 +1,16 @@
 import * as types from './ActionTypes'
 
 const initialState = {
-	loading: false,
-	data: Object
+    loading: false,
+    userLoading: false,
+    service: Object,
+    user: Object
 }
 
 export const isLoadingSelector = (state) => state.serviceInfo.loading
-export const getServiceInfoSelector = (state) => state.serviceInfo.data
+export const isUserLoadingSelector = (state) => state.serviceInfo.userLoading
+export const getServiceInfoSelector = (state) => state.serviceInfo.service
+export const getUserInfoSelector = (state) => state.serviceInfo.user
 
 export function serviceInfoReducer (state = initialState, action){
 	switch (action.type) {
@@ -17,11 +21,24 @@ export function serviceInfoReducer (state = initialState, action){
         case types.SERVICE_SUCCESS:
             return Object.assign({}, state, {
                 loading: false,
-                data: action.data
+                service: action.data
             })
         case types.SERVICE_FAILURE:
             return Object.assign({}, state, {
                 loading: false
+            })
+        case types.USER_REQUEST:
+            return Object.assign({}, state, {
+                userLoading: true
+            })
+        case types.USER_SUCCESS:
+            return Object.assign({}, state, {
+                userLoading: false,
+                user: action.data
+            })
+        case types.USER_FAILURE:
+            return Object.assign({}, state, {
+                userLoading: false
             })
 		default:
 			return state
