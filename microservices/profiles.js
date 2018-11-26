@@ -1,5 +1,6 @@
 import axios from 'axios';
 import * as gateway from './gateway';
+import { logRequest } from './utils';
 
 const profiles = [
     {
@@ -25,7 +26,7 @@ export async function getProfile(id) {
         }
     });
 
-    console.log(request)
+    logRequest("getProfile", request)
 
     return {
         status: request.status,

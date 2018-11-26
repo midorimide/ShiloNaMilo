@@ -1,14 +1,14 @@
 import React from 'react';
 import { Provider } from 'react-redux'
-import { StyleSheet, Text, View } from 'react-native';
 import ServicesContainer from './features/services';
+import ServiceInfoContainer from './features/serviceInfo';
+import UserInfoContainer from './features/userInfo';
 import { configureStore } from './Store';
 import {
   createAppContainer,
   createStackNavigator,
   createDrawerNavigator,
   DrawerActions } from 'react-navigation'
-import ServiceInfoContainer from './features/serviceInfo';
 import { Ionicons } from '@expo/vector-icons'
 
 const Drawer = createDrawerNavigator(
@@ -29,11 +29,12 @@ const Drawer = createDrawerNavigator(
 
 const ModalStack = createStackNavigator(
   {
-    serviceInfo: ServiceInfoContainer
+    serviceInfo: ServiceInfoContainer,
+    userInfo: UserInfoContainer
   },
   {
     headerMode: 'none',
-    navigationOptions: ({navigation}) => ({
+    navigationOptions: () => ({
       headerStyle: {backgroundColor: '#4C3E54'},
       title: 'ShiloNaMilo',
       headerTintColor: 'white'

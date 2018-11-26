@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, ActivityIndicator } from 'react-native'
+import { View, ActivityIndicator } from 'react-native'
 import PropTypes from 'prop-types'
 import ServiceList from '../../components/ServiceList'
 
@@ -13,7 +13,7 @@ export default class ServicesScreen extends Component {
 	}
 
 	render() {
-		if (this.props.isLoading) {
+		if (this.props.areServicesLoading) {
             return (
 				<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
 					<ActivityIndicator size='large'/>
@@ -22,14 +22,14 @@ export default class ServicesScreen extends Component {
 		}
 		else {
 			return (
-				<ServiceList items={this.props.services}/>
+				<ServiceList services={this.props.services}/>
 			)
 		}
 	}
 }
 
 ServicesScreen.propTypes = {
-	isLoading: PropTypes.bool,
+	areServicesLoading: PropTypes.bool,
 	services: PropTypes.array,
 	getAllServices: PropTypes.func
 }

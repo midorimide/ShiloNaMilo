@@ -1,5 +1,6 @@
 import axios from 'axios';
 import * as gateway from './gateway';
+import { logRequest } from './utils';
 
 export const services = [
     {
@@ -18,7 +19,7 @@ export async function getAllServices(start = 0, amount = 10, sortingField = 'id'
         params: {amount, start, sortingField, ascending}
     });
 
-    console.log(request)
+    logRequest("getAllServices", request)
 
     return {
         status: request.status,
@@ -31,7 +32,7 @@ export async function getServiceById(id){
         params: {id}
     });
 
-    console.log(request)
+    logRequest("getServiceById", request)
 
     return {
         status: request.status,
@@ -45,11 +46,11 @@ export async function getServicesInCategory(category,
         params: {category, amount, start, sortingField, ascending}
     });
 
-    console.log(request)
+    logRequest("getServicesInCategory", request)
 
     return {
         status: request.status,
-        result: request.data
+        result: request.data.result
     }
 }
 
@@ -59,10 +60,10 @@ export async function getServicesByUser(user,
         params: {user, amount, start, sortingField, ascending}
     });
 
-    console.log(request)
+    logRequest("getServicesByUser", request)
 
     return {
         status: request.status,
-        result: request.data
+        result: request.data.result
     }
 }

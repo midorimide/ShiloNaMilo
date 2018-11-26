@@ -6,18 +6,18 @@ import { withNavigation } from 'react-navigation';
 
 class ServiceListItem extends Component {
 	render() {
-		if (this.props.data.mark < 0){
-			this.props.data.mark = 0
+		if (this.props.serviceInfo.mark < 0){
+			this.props.serviceInfo.mark = 0
 		}
-		if (this.props.data.mark > 5){
-			this.props.data.mark = 5
+		if (this.props.serviceInfo.mark > 5){
+			this.props.serviceInfo.mark = 5
 		}
 		return (
 			<TouchableOpacity onPress={() => {
-				this.props.navigation.navigate('serviceInfo', {id: this.props.data.id})}}>
+				this.props.navigation.navigate('serviceInfo', {id: this.props.serviceInfo.id})}}>
 				<View>
-					<Text>{this.props.data.name}</Text>
-                	<Star score={this.props.data.mark}/>
+					<Text>{this.props.serviceInfo.name}</Text>
+                	<Star score={this.props.serviceInfo.mark}/>
 				</View>
 			</TouchableOpacity>
 		);
@@ -25,7 +25,7 @@ class ServiceListItem extends Component {
 }
 
 ServiceListItem.propTypes = {
-	data: PropTypes.object
+	serviceInfo: PropTypes.object
 }
 
 export default withNavigation(ServiceListItem)

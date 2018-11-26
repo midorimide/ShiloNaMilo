@@ -1,27 +1,27 @@
 import * as types from './ActionTypes'
 
 const initialState = {
-	loading: false,
-	data: []
+	areServicesLoading: false,
+	services: []
 }
 
-export const isLoadingSelector = (state) => state.services.loading
-export const getServicesSelector = (state) => state.services.data
+export const areServicesLoadingSelector = (state) => state.services.areServicesLoading
+export const servicesSelector = (state) => state.services.services
 
 export function servicesReducer (state = initialState, action){
 	switch (action.type) {
         case types.SERVICES_REQUEST:
             return Object.assign({}, state, {
-                loading: true
+                areServicesLoading: true
             })
         case types.SERVICES_SUCCESS:
             return Object.assign({}, state, {
-                loading: false,
-                data: action.data
+                areServicesLoading: false,
+                services: action.data
             })
         case types.SERVICES_FAILURE:
             return Object.assign({}, state, {
-                loading: false
+                areServicesLoading: false
             })
 		default:
 			return state

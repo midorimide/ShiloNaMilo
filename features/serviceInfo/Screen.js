@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { View, Text, ActivityIndicator } from 'react-native'
+import { View, Text, ActivityIndicator, TouchableOpacity } from 'react-native'
 import Star from 'react-native-star-view'
 import { withNavigation } from 'react-navigation';
 
@@ -22,33 +22,36 @@ class ServiceInfoScreen extends Component{
 			)
 		}
 
-		if (this.props.service.mark < 0){
-			this.props.service.mark = 0
+		if (this.props.serviceInfo.mark < 0){
+			this.props.serviceInfo.mark = 0
 		}
-		if (this.props.service.mark > 5){
-			this.props.service.mark = 5
+		if (this.props.serviceInfo.mark > 5){
+			this.props.serviceInfo.mark = 5
 		}
 
-		let userDisplay = Component
-		if (this.props.isUserLoading){
-			userDisplay = <ActivityIndicator size="small"/>
+		let ownerDisplay = Component
+		if (this.props.isServiceOwnerLoading){
+			ownerDisplay = <ActivityIndicator size="small"/>
 		} else {
 			let username = "Default user"
-			if (this.props.user.username !== undefined){
-				username = this.props.user.username
+			if (this.props.serviceOwner.username !== undefined){
+				username = this.props.serviceOwner.username
 			}
-			userDisplay = <Text>by {username}</Text>
+			ownerDisplay = <TouchableOpacity onPress={() => {
+				this.props.navigation.navigate('userInfo', {id: this.props.serviceOwner.id})}}>
+				<Text>by {username}</Text>
+			</TouchableOpacity>
 		}
 
 		return (
 			<View>
-				<Text>{this.props.service.name}</Text>
-				{userDisplay}
-				<Text>Category: {this.props.service.category}</Text>
+				<Text>{this.props.serviceInfo.name}</Text>
+				{ownerDisplay}
+				<Text>Category: {this.props.serviceInfo.category}</Text>
 				<Text>Description:</Text>
-				<Text>{this.props.service.description}</Text>
-                <Star score={this.props.service.mark}/>
-				<Text>Voted: {this.props.service.mark_amount}</Text>
+				<Text>{this.props.serviceInfo.description}</Text>
+                <Star score={this.props.serviceInfo.mark}/>
+				<Text>Voted: {this.props.serviceInfo.mark_amount}</Text>
 			</View>
 		);
 	}
@@ -56,9 +59,9 @@ class ServiceInfoScreen extends Component{
 
 ServiceInfoScreen.propTypes = {
 	isServiceLoading: PropTypes.bool,
-	isUserLoading: PropTypes.bool,
-	service: PropTypes.object,
-	user: PropTypes.object,
+	isServiceOwnerLoading: PropTypes.bool,
+	serviceInfo: PropTypes.object,
+	serviceOwner: PropTypes.object,
 	getServiceById: PropTypes.func
 }
 

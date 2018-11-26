@@ -7,15 +7,15 @@ class ServiceList extends Component {
 	render() {
 		return (
 			<FlatList
-				data={this.props.items}
+				data={this.props.services}
 				keyExtractor={(item,index) => item.id.toString()}
-				renderItem={({item}) => <ServiceListItem data={item}/>}/>
+				renderItem={({item}) => <ServiceListItem serviceInfo={item}/>}/>
 		);
 	}
 }
 
 ServiceList.propTypes = {
-	items: PropTypes.array
+	services: PropTypes.array
 }
 
 export default ServiceList

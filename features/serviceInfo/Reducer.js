@@ -1,44 +1,44 @@
 import * as types from './ActionTypes'
 
 const initialState = {
-    loading: false,
-    userLoading: false,
-    service: Object,
-    user: Object
+    isServiceLoading: false,
+    isServiceOwnerLoading: false,
+    serviceInfo: Object,
+    serviceOwner: Object
 }
 
-export const isLoadingSelector = (state) => state.serviceInfo.loading
-export const isUserLoadingSelector = (state) => state.serviceInfo.userLoading
-export const getServiceInfoSelector = (state) => state.serviceInfo.service
-export const getUserInfoSelector = (state) => state.serviceInfo.user
+export const isServiceLoadingSelector = (state) => state.serviceInfo.isServiceLoading
+export const isServiceOwnerLoadingSelector = (state) => state.serviceInfo.isServiceOwnerLoading
+export const serviceInfoSelector = (state) => state.serviceInfo.serviceInfo
+export const serviceOwnerSelector = (state) => state.serviceInfo.serviceOwner
 
 export function serviceInfoReducer (state = initialState, action){
 	switch (action.type) {
         case types.SERVICE_REQUEST:
             return Object.assign({}, state, {
-                loading: true
+                isServiceLoading: true
             })
         case types.SERVICE_SUCCESS:
             return Object.assign({}, state, {
-                loading: false,
-                service: action.data
+                isServiceLoading: false,
+                serviceInfo: action.data
             })
         case types.SERVICE_FAILURE:
             return Object.assign({}, state, {
-                loading: false
+                isServiceLoading: false
             })
-        case types.USER_REQUEST:
+        case types.OWNER_REQUEST:
             return Object.assign({}, state, {
-                userLoading: true
+                isServiceOwnerLoading: true
             })
-        case types.USER_SUCCESS:
+        case types.OWNER_SUCCESS:
             return Object.assign({}, state, {
-                userLoading: false,
-                user: action.data
+                isServiceOwnerLoading: false,
+                serviceOwner: action.data
             })
-        case types.USER_FAILURE:
+        case types.OWNER_FAILURE:
             return Object.assign({}, state, {
-                userLoading: false
+                isServiceOwnerLoading: false
             })
 		default:
 			return state

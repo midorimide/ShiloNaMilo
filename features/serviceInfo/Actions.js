@@ -23,18 +23,18 @@ export const getServiceById = (id) => async (dispatch) => {
 
 const getUserById = (id) => async (dispatch) => {
     dispatch({
-        type: types.USER_REQUEST
+        type: types.OWNER_REQUEST
     })
 
     let request = await Users.getProfile(id)
     if (request.status === 200){
         dispatch({
-            type: types.USER_SUCCESS,
+            type: types.OWNER_SUCCESS,
             data: request.result
         })
     } else {
         dispatch({
-            type: types.USER_FAILURE
+            type: types.OWNER_FAILURE
         })
     }
 }
