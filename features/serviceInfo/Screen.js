@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { View, Text, ActivityIndicator, TouchableOpacity } from 'react-native'
-import Star from 'react-native-star-view'
-import { withNavigation } from 'react-navigation';
+import { ScrollView, View, ActivityIndicator } from 'react-native'
+import { Text, Rating, ListItem, Card } from 'react-native-elements'
+import { withNavigation } from 'react-navigation'
+import TouchableScale from 'react-native-touchable-scale'
 
 class ServiceInfoScreen extends Component{
 	constructor(props){
@@ -13,47 +14,73 @@ class ServiceInfoScreen extends Component{
 		this.props.getServiceById(this.props.navigation.getParam('id', 0))
 	}
 
-	render(){
-		if (this.props.isServiceLoading){
+	validateMark(service){
+		if (service.mark < 0){
+			service.mark = 0
+		}
+		if (service.mark > 5){
+			service.mark = 5
+		}
+	}
+
+	createServiceOwnerComponent(owner){
+		if (this.props.isServiceOwnerLoading){
+			return <ActivityIndicator size="large"/>
+		} else {
 			return(
-				<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-					<ActivityIndicator size="large"/>
-				</View>
+				<ListItem
+					onPress={() => {
+						this.props.navigation.push('userInfo', {id: owner.id})
+					}}
+					component={TouchableScale}
+					friction={90}
+					tension={100}
+					activeScale={0.95}
+
+					leftAvatar={{rounded: true, source: {uri: owner.profilePicturePath}}}
+					title={owner.username}
+
+					chevron
+				/>
 			)
 		}
+	}
 
-		if (this.props.serviceInfo.mark < 0){
-			this.props.serviceInfo.mark = 0
-		}
-		if (this.props.serviceInfo.mark > 5){
-			this.props.serviceInfo.mark = 5
-		}
+	createServiceScreen(service){
+		return(
+			<ScrollView>
+				<View style={{flexDirection: 'column', justifyContent:'flex-start', alignContent:'center'}}>
+					<Text h4>
+						{service.name}
+					</Text>
+					<View style={{flexDirection: 'row', justifyContent: 'center', alignContent: 'center'}}>
+						<Rating readonly fractions={2} startingValue={service.mark} imageSize={20}/>
+						<Text h5 style={{marginLeft: 5}}>
+							(voted: {service.mark_amount})
+						</Text>
+					</View>
+					<Text h5>
+						Category: {service.category}
+					</Text>
+				</View>
+				<Card title='Owner'>
+					{this.createServiceOwnerComponent(this.props.serviceOwner)}
+				</Card>
+				<Card title='Description'>
+					<Text h5>
+						{service.description}
+					</Text>
+				</Card>
+			</ScrollView>
+		)
+	}
 
-		let ownerDisplay = Component
-		if (this.props.isServiceOwnerLoading){
-			ownerDisplay = <ActivityIndicator size="small"/>
-		} else {
-			let username = "Default user"
-			if (this.props.serviceOwner.username !== undefined){
-				username = this.props.serviceOwner.username
-			}
-			ownerDisplay = <TouchableOpacity onPress={() => {
-				this.props.navigation.navigate('userInfo', {id: this.props.serviceOwner.id})}}>
-				<Text>by {username}</Text>
-			</TouchableOpacity>
+	render(){
+		if (this.props.isServiceLoading){
+			return <ActivityIndicator size="large"/>
 		}
-
-		return (
-			<View>
-				<Text>{this.props.serviceInfo.name}</Text>
-				{ownerDisplay}
-				<Text>Category: {this.props.serviceInfo.category}</Text>
-				<Text>Description:</Text>
-				<Text>{this.props.serviceInfo.description}</Text>
-                <Star score={this.props.serviceInfo.mark}/>
-				<Text>Voted: {this.props.serviceInfo.mark_amount}</Text>
-			</View>
-		);
+		this.validateMark(this.props.serviceInfo)
+		return this.createServiceScreen(this.props.serviceInfo)
 	}
 }
 

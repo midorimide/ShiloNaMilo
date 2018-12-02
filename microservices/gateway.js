@@ -1,9 +1,3 @@
-export const GATEWAY_ENDPOINT = 'http://localhost:8762/api';
-
-export function get(path) {
-    return GATEWAY_ENDPOINT + path;
-}
-
 function servicePath(rootPath, pathsGen) {
     let entry = (path = '') => rootPath + path;
     let paths = pathsGen(entry)[0];

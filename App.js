@@ -33,6 +33,7 @@ const ModalStack = createStackNavigator(
     userInfo: UserInfoContainer
   },
   {
+    mode: 'modal',
     headerMode: 'none',
     navigationOptions: () => ({
       headerStyle: {backgroundColor: '#4C3E54'},
