@@ -42,17 +42,19 @@ export const services = [
 ];
 
 export async function getAllServices(start = 0, amount = 10, sortingField = 'id', ascending = true){
-    let request = await axios.get(gateway.paths.services.all, {
-        params: {amount, start, sortingField, ascending}
-    })
+    // let request = await axios.get(gateway.paths.services.all, {
+    //     params: {amount, start, sortingField, ascending}
+    // })
 
-    request.data = request.data.concat(services)
+    // request.data = request.data.concat(services)
 
-    logRequest("getAllServices", request)
+    // logRequest("getAllServices", request)
 
     return {
-        status: request.status,
-        result: request.data
+        // status: request.status,
+        // result: request.data
+        status: 200,
+        result: services
     }
 }
 

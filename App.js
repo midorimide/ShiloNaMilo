@@ -6,9 +6,13 @@ import UserInfoContainer from './features/userInfo';
 import { configureStore } from './Store';
 import {
   createAppContainer,
-  createStackNavigator,
-  createDrawerNavigator,
   DrawerActions } from 'react-navigation'
+import {
+  createDrawerNavigator
+  } from 'react-navigation-drawer'
+import {
+  createStackNavigator
+} from 'react-navigation-stack'
 import { Ionicons } from '@expo/vector-icons'
 
 const Drawer = createDrawerNavigator(
